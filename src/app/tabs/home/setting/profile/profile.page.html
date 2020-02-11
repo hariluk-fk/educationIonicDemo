@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHelf="/" slot="start" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <div style="justify-content: center;">
+        <img class="profile-img" src="https://pbs.twimg.com/media/DkJlUcbUcAIBOUB.jpg">
+      </div>
+      <ion-list *ngIf="user != null">
+        <ion-item class="ion-no-padding" >
+          <ion-label position="floating">Username *</ion-label>
+          <ion-input clearInput required type="text" [(ngModel)]="user.userName"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Mobile No. *</ion-label>
+          <ion-input clearInput required type="tel" [(ngModel)]="user.phoneNo"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Email *</ion-label>
+          <ion-input clearInput required type="email" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">Gender *</ion-label>
+          <ion-select placeholder="Select One" [(ngModel)]="user.gender">
+            <ion-select-option value="F">Female</ion-select-option>
+            <ion-select-option value="M">Male</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- <ion-item class="ion-no-padding">
+          <ion-label position="floating">Gender *</ion-label>
+          <ion-input clearInput required type="text" [(ngModel)]="user.gender"></ion-input>
+        </ion-item> -->
+
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">ID Card</ion-label>
+          <ion-input clearInput [(ngModel)]="user.idCard"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-button class="setting-button" (click)="saveProfile()">SAVE</ion-button>
+</ion-footer>

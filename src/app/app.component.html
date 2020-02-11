@@ -7,23 +7,23 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>
-          <ion-icon slot="start" name="home"></ion-icon>
+        <ion-item (click)="openShopping()">
+          <ion-icon slot="start" name="cart"></ion-icon>
           Shopping
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" name="document"></ion-icon>
-          Billing
+        <ion-item (click)="openHome()">
+          <ion-icon slot="start" name="home"></ion-icon>
+          Home
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" name="cart"></ion-icon>
-          My Cart
+        <ion-item (click)="openNotification()">
+          <ion-icon slot="start" name="notifications"></ion-icon>
+          Notification
         </ion-item>
         <ion-item>
           <ion-icon slot="start" name="more"></ion-icon>
           About us
         </ion-item>
-        <ion-item>
+        <ion-item (click)="logout()">
           <ion-icon slot="start" name="log-out"></ion-icon>
           Logout
         </ion-item>

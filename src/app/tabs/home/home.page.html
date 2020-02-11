@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="true"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="hammer" slot="icon-only" (click)="openSetting()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides [options]="bannerConfig" pager=true>
+    <ion-slide *ngFor="let banner of banners">
+      <img class="ion-img" src="{{banner.path}}">
+    </ion-slide>
+  </ion-slides>
+
+  <ion-grid>
+    <ion-row class="menu-row">
+      <ion-col class="menu-column">
+        Menu 1
+      </ion-col>
+      <ion-col class="menu-column">
+        Menu 2
+      </ion-col>
+    </ion-row>
+    <ion-row class="menu-row">
+      <ion-col class="menu-column">
+        Menu 3
+      </ion-col>
+    </ion-row>
+    <ion-row class="menu-row" style="margin-top: 20px;">
+      <ion-slides [options]="sliderConfig">
+        <ion-slide>
+          <img class="icon-image" src="../../assets/image/apple.png">
+        </ion-slide>
+        <ion-slide>
+          <img class="icon-image" src="../../assets/image/billboard.png">
+        </ion-slide>
+        <ion-slide>
+          <img class="icon-image" src="../../assets/image/travel.png">
+        </ion-slide>
+        <ion-slide>
+          <img class="icon-image" src="../../assets//image//handmade.png">
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

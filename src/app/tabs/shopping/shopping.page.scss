@@ -1,0 +1,49 @@
+ion-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 80%;
+    align-items: center;
+}
+
+.cart-icon {
+    
+}
+
+.shopping-content {
+    background-color: black;
+    color: black;
+}
+
+.category-block{
+    color: black;
+    background-color: white;
+    margin: 10px;
+}
+
+.category-banner{
+    border-bottom: solid;
+    border-color: lightgrey;
+    padding: 10px;
+    border-width: 1px;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.category-card{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.card-title{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.card-content{
+    font-weight: 400;
+    font-size: 18px;
+    text-align: left;
+}

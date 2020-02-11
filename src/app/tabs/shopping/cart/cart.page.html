@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-back-button defaultHelf="/" slot="start" color="dark"></ion-back-button>
+    <ion-title>My Bill</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item-sliding *ngFor="let item of selectedItems" lines="insert">
+      <div *ngIf="item.count > 0">
+        <ion-item-options side="start" (ionSwipe)="delFromCart(item)">
+          <ion-item-option color="danger" expandable (click)="delFromCart(item)" >Delete</ion-item-option>
+        </ion-item-options>
+        <ion-item>
+          {{ item.count }}x {{ item.name }}
+          <ion-label slot="end" class="ion-text-right">{{ (item.price * item.count) | currency:'':'symbol'}}</ion-label>
+        </ion-item>
+      </div>
+    </ion-item-sliding>  
+
+    <ion-item>
+      Total: <span slot="end">{{ total | currency:'':'symbol'}}</span>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

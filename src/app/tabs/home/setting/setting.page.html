@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHelf="/" slot="start" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Setting</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-icon name="contact" slot="icon-only"></ion-icon> -->
+      <img src='../../../assets/image/pubg.png' class="icon" slot="icon-only" (click)="openProfile()">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="border-width: 0px;">
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label>Notification</ion-label>
+          <ion-toggle></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item></ion-item>
+        <ion-item></ion-item>
+        <ion-item></ion-item>
+        <ion-item></ion-item>
+        <ion-item></ion-item>
+        <ion-item></ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer no-shadow>
+    <ion-button class="setting-button">SAVE</ion-button>
+</ion-footer>

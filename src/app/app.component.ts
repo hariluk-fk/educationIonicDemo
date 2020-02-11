@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Platform, MenuController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private menu: MenuController
+    private menu: MenuController,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -28,5 +30,25 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  openShopping() {
+    this.router.navigate(['tabs/shopping']);
+    this.menu.close();
+  }
+
+  openHome() {
+    this.router.navigate(['tabs/home']);
+    this.menu.close();
+  }
+
+  openNotification() {
+    this.router.navigate(['tabs/notification']);
+    this.menu.close();
+  }
+
+  logout(){
+    this.router.navigate(['authentication']);
+    this.menu.close();
   }
 }

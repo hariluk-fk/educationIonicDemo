@@ -1,0 +1,36 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+    <ion-row>
+      <ion-col>
+        <ion-label>Email</ion-label>
+        <ion-input clearInput required type="email"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Password</ion-label>
+        <ion-input required type="password"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding>
+      <ion-col no-padding>
+        <ion-button no-padding class="login-button" (click)="onLogin()">LOGIN</ion-button>
+      </ion-col>
+      <ion-col no-padding>
+        <ion-button no-padding class="login-button" (click)="onLoginScan()">Scan</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding>
+      <ion-col no-padding>
+        <ion-button no-padding class="login-button" (click)="onFacebookLogin()">FACEBOOK</ion-button>
+      </ion-col>
+      <ion-col no-padding>
+      <ion-button no-padding class="login-button" (click)="onLoginNoMember()">NO MEMBER</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
