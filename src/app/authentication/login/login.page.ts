@@ -23,11 +23,6 @@ export class LoginPage implements OnInit {
     private plt: Platform
   ) {
     this.plt.ready().then(() => {
-      // this.storage.get('pin').then(pin => {
-      //   if (!pin) {
-      //     this.onSetPIN();
-      //   }
-      // });
       this.pinDialog.prompt('Enter your PIN', 'Verify PIN', ['OK', 'Cancel'])
         .then(
           (result: any) => {
