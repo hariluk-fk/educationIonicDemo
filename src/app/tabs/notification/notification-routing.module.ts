@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: NotificationPage
+  },
+  {
+    path: 'notification-detail/:notiId',
+    loadChildren: () => import('./notification-detail/notification-detail.module').then( m => m.NotificationDetailPageModule)
   }
 ];
 

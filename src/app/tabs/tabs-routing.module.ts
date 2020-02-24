@@ -12,8 +12,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('./shopping/shopping.module').then(m => m.ShoppingPageModule)
+            loadChildren: () => import('./shopping/shopping.module').then( m => m.ShoppingPageModule)
           }
         ]
       },
@@ -22,8 +21,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('./home/home.module').then(m => m.HomePageModule)
+            loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
           }
         ]
       },
@@ -32,14 +30,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('./notification/notification.module').then(m => m.NotificationPageModule)
+            loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: 'home',
         pathMatch: 'full'
       }
     ]
@@ -49,6 +46,22 @@ const routes: Routes = [
     redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
+
+// {
+//   path: 'tabs',
+//   component: TabsPage,
+//   children: [
+//     { path: '', redirectTo: 'home', pathMatch: 'full' },
+//     { path: 'shopping', loadChildren: './shopping/shopping.module#ShoppingPageModule' },
+//     { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+//     { path: 'notification', loadChildren: './notification/notification.module#NotificationPageModule' },
+//   ]
+// },
+// {
+//   path: '',
+//   redirectTo: '/tabs/home',
+//   pathMatch: 'full'
+// }
 ];
 
 @NgModule({

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart/cart.service';
-import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { ShoppingService } from './shopping.service';
+import { Observable } from 'rxjs';
+import { product } from 'src/app/model/product';
+import { Cart } from 'src/app/model/Cart';
+import { Configuration } from 'src/app/app.constants';
 
 @Component({
   selector: 'app-shopping',
@@ -10,12 +15,16 @@ import { NavController } from '@ionic/angular';
 })
 
 export class ShoppingPage implements OnInit {
-  cart = [];
+  cartList = [];
   items = [];
+  loading: any;
+  cartCount = 0;
+
+  productCreateBtnTxt: string;
 
   sliderConfig = {
-    spaceBetween: 7,
-    slidesPerView: 2,
+    spaceBetween: 10,
+    slidesPerView: 1.2,
     coverflowEffect: {
       rotate: 50,
       stretch: 0,
@@ -25,27 +34,140 @@ export class ShoppingPage implements OnInit {
     }
   };
 
-  constructor(private cartService: CartService, private router: Router, private nav: NavController) {}
+  productList: Observable<product>;
+  productListTmp: any;
+
+  constructor(
+    private loadingController: LoadingController,
+    private alertController: AlertController,
+    private router: Router,
+    private shopService: ShoppingService,
+    private configuration: Configuration) {}
 
   ngOnInit() {
-    this.cart = this.cartService.getCart();
-    this.items = this.cartService.getProducts();
+    this.productCreateBtnTxt = this.configuration.productCreateBtnTxt;
   }
 
-  addToCart(product) {
-    this.cartService.addProduct(product);
+  ionViewWillEnter() {
+    this.items = [];
+    this.getProductAll();
+    this.chkTotalCart();
+  }
+
+  getCartById(cartId: string) {
+    // tslint:disable-next-line: prefer-for-of
+    for (const cartChk of this.cartList) {
+      if (cartChk.cartId === cartId) {
+        return cartChk;
+      }
+    }
+    return null;
+  }
+
+  chkTotalCart() {
+    this.cartCount = 0;
+    if (this.cartList.length > 0) {
+      for (const cartChk of this.cartList) {
+        this.cartCount = this.cartCount + cartChk.cartCount;
+      }
+    }
+  }
+
+  chkCartList(cartId: string) {
+    for (const cartChk of this.cartList) {
+      if (cartChk.cartId === cartId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  addToCart(productSelect: product) {
+    const cartTmp = {
+      cartId: productSelect.productId,
+      cartTitle: productSelect.productTitle,
+      cartPrice: +productSelect.productPrice,
+      cartCount: 1
+    };
+
+    const cartChk = this.getCartById(cartTmp.cartId);
+    if (cartChk != null) {
+      if ((cartChk.cartCount + 1) > +productSelect.productCount) {
+        this.alertConfirmUpdate('This product is not enough!');
+      } else {
+        cartChk.cartCount = cartChk.cartCount + 1;
+        this.cartCount = this.cartCount + 1;
+      }
+    } else {
+      this.cartList.push(cartTmp);
+      this.cartCount = this.cartCount + 1;
+    }
+  }
+
+  async getProductAll() {
+    this.loading = this.createLoadingController('Loading...');
+    (await this.loading).present();
+    this.productList = this.shopService.getAllProduct();
+    this.productList.subscribe(async (dataList: any) => {
+      // this.productListTmp = dataList;
+      this.items = dataList;
+      (await this.loading).dismiss();
+    });
   }
 
   openCart() {
-    // this.myNavService.myParam = {locs:locs};
-    // await this.navCtrl.goForward('/map-page');
-    // // const test = 'test send data';
-    this.router.navigate(['/tabs/shopping/cart']);
-    // this.router.navigate(['/tabs/shopping/cart'], 'id': test);
+    const navigationExtras: NavigationExtras = {
+        state: {
+          cartList: this.cartList
+        }
+      };
+    this.router.navigateByUrl('app/tabs/shopping/cart', navigationExtras);
   }
 
-  openProduct(product) {
-    this.router.navigate(['/tabs/shopping/product']);
+  openProduct(productId: string) {
+    if (typeof productId === 'string' && productId.length > 0) {
+      this.router.navigateByUrl('app/tabs/shopping/product/' + productId);
+    } else {
+      this.alertConfirmUpdate('Invalid product!');
+    }
+  }
+
+  onCreateProduct() {
+      this.router.navigateByUrl('app/tabs/shopping/product/' + (this.items.length + 1).toString());
+  }
+
+  async alertConfirmUpdate(msg: string) {
+    const alert = await this.alertController.create({
+      message: msg,
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel:');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async createLoadingController(msg: string) {
+    const loading = await this.loadingController.create({
+      showBackdrop: true,
+      spinner: 'lines-small',
+      message: msg,
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return loading;
   }
 
 }

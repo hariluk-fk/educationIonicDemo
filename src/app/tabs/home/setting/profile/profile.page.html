@@ -7,43 +7,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="container">
   <ion-row>
     <ion-col>
-      <div style="justify-content: center;">
-        <img class="profile-img" src="https://pbs.twimg.com/media/DkJlUcbUcAIBOUB.jpg">
+      <div *ngIf="picUrl != null" class="ion-no-padding profile-img-container">
+        <!-- <img class="profile-img" src="picUrl"> -->
+        <ion-img class="profile-img" [src]="picUrl"></ion-img>
       </div>
       <ion-list *ngIf="user != null">
         <ion-item class="ion-no-padding" >
-          <ion-label position="floating">Username *</ion-label>
+          <ion-label position="floating">{{ userNameTxt }} *</ion-label>
           <ion-input clearInput required type="text" [(ngModel)]="user.userName"></ion-input>
         </ion-item>
 
         <ion-item class="ion-no-padding">
-          <ion-label position="floating">Mobile No. *</ion-label>
+            <ion-label position="floating">{{ emailTxt }} *</ion-label>
+            <ion-input clearInput required type="email" [(ngModel)]="user.email"></ion-input>
+          </ion-item>
+
+        <ion-item class="ion-no-padding">
+          <ion-label position="floating">{{ phoneNoTxt }} *</ion-label>
           <ion-input clearInput required type="tel" [(ngModel)]="user.phoneNo"></ion-input>
         </ion-item>
 
         <ion-item class="ion-no-padding">
-          <ion-label position="floating">Email *</ion-label>
-          <ion-input clearInput required type="email" [(ngModel)]="user.email"></ion-input>
-        </ion-item>
-
-        <ion-item class="ion-no-padding">
-          <ion-label position="floating">Gender *</ion-label>
+          <ion-label position="floating">{{ genderTxt }} *</ion-label>
           <ion-select placeholder="Select One" [(ngModel)]="user.gender">
             <ion-select-option value="F">Female</ion-select-option>
             <ion-select-option value="M">Male</ion-select-option>
           </ion-select>
         </ion-item>
 
-        <!-- <ion-item class="ion-no-padding">
-          <ion-label position="floating">Gender *</ion-label>
-          <ion-input clearInput required type="text" [(ngModel)]="user.gender"></ion-input>
-        </ion-item> -->
-
         <ion-item class="ion-no-padding">
-          <ion-label position="floating">ID Card</ion-label>
+          <ion-label position="floating">{{ idCardTxt }}</ion-label>
           <ion-input clearInput [(ngModel)]="user.idCard"></ion-input>
         </ion-item>
       </ion-list>
@@ -52,5 +48,5 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button class="setting-button" (click)="saveProfile()">SAVE</ion-button>
+  <ion-button class="profile-save-button" (click)="saveProfile()">{{ saveBtnTxt }}</ion-button>
 </ion-footer>

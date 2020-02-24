@@ -1,0 +1,32 @@
+.product-img-container {
+    text-align: center;
+    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.product-img {
+    height: 300px;
+    padding: 20px;
+}
+
+.product-item {
+    border: none;
+    --background: #f4f5f8;
+    --border-color: #f4f5f8;
+}
+
+
+.product-save-button-container {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+.product-save-button {
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    font-weight: 600;
+}

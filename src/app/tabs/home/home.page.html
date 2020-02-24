@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Homeee
+      Homee
     </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="true"></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons *ngIf="email != null && email != ''" slot="end">
       <ion-icon name="hammer" slot="icon-only" (click)="openSetting()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>

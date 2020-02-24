@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "854780728713",
+    "firebase_url": "https://ionic-demo-20be9.firebaseio.com",
+    "project_id": "ionic-demo-20be9",
+    "storage_bucket": "ionic-demo-20be9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854780728713:android:1c468c9b15d180e8043d58",
+        "android_client_info": {
+          "package_name": "hariluk.education.ionic.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854780728713-hnia21ma7jsvrlf6i3qo6bffpgeq778r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm-bk3zvK-bRKQhc2GnbugSh3fjbvQ5is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854780728713-hnia21ma7jsvrlf6i3qo6bffpgeq778r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "854780728713-qhq7t47n9becnk000a8uboh9a6j7fgcc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hariluk.education.ionic.demo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

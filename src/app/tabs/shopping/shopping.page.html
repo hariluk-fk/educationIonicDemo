@@ -6,9 +6,9 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="true"></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons *ngIf="cartCount > 0" slot="end">
       <ion-button (click)="openCart()">
-        <ion-badge *ngIf="cart.length > 0" color="dark">{{ cart.length }}</ion-badge>
+        <ion-badge *ngIf="cartCount > 0" color="dark">{{ cartCount }}</ion-badge>
         <ion-icon name="cart" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,26 +16,27 @@
 </ion-header>
 
 <ion-content color="medium">
-  <div *ngFor="let cat of items" class="category-block">
-    <ion-row class="category-banner ion-no-padding">
-      <!-- <ion-col text-left button tappable (click)="cat.expanded = !cat.expanded" align-self-center> -->
+  <div class="category-block">
+    <!-- <ion-row class="category-banner ion-no-padding">
+      <ion-col text-left button tappable (click)="cat.expanded = !cat.expanded" align-self-center>
       <ion-col>
-        {{cat.category}}
+        12
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     
     <ion-slides [options]="sliderConfig">
-      <ion-slide *ngFor="let product of cat.products">
+      <ion-slide *ngFor="let product of items">
         <!-- <div *ngIf="cat.expanded"> -->
         <div>
-          <ion-card class="category-card" (click)="addToCart(product)" no-shadow>
-            <ion-card-title class="card-title">
-              <img src="https://via.placeholder.com//300x300">
+          <ion-card class="category-card" no-shadow>
+            <ion-card-title class="card-title" (click)="openProduct(product.productId)">
+              <ion-img *ngIf="product.productPic != ''" class="product-image" src="{{product.productPic}}"></ion-img>
+              <img *ngIf="product.productPic === ''" src="https://i.mydramalist.com/vWdy2f.jpg">
             </ion-card-title>  
-            <ion-card-content class="card-content" padding-start="5px" >
-              {{ product.name }}
+            <ion-card-content class="card-content" padding-start="5px" (click)="addToCart(product)">
+              {{ product.productTitle }}
               <br>
-              {{ product.price | currency:'':'symbol' }}
+              {{ product.productPrice | currency:'':'symbol' }}
             </ion-card-content>
           </ion-card>
         </div>
@@ -43,3 +44,7 @@
     </ion-slides>
   </div>
 </ion-content>
+
+<ion-footer >
+  <ion-button class="product-create-button" (click)="onCreateProduct()">{{ productCreateBtnTxt }}</ion-button>
+</ion-footer>

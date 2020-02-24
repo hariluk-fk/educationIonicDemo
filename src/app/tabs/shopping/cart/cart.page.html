@@ -10,14 +10,14 @@
 <ion-content>
   <ion-list>
 
-    <ion-item-sliding *ngFor="let item of selectedItems" lines="insert">
-      <div *ngIf="item.count > 0">
-        <ion-item-options side="start" (ionSwipe)="delFromCart(item)">
-          <ion-item-option color="danger" expandable (click)="delFromCart(item)" >Delete</ion-item-option>
+    <ion-item-sliding *ngFor="let cart of cartList" lines="insert">
+      <div *ngIf="cart.cartCount > 0">
+        <ion-item-options side="start" (ionSwipe)="delFromCart(cart)">
+          <ion-item-option color="danger" expandable (click)="delFromCart(cart)" >Delete</ion-item-option>
         </ion-item-options>
         <ion-item>
-          {{ item.count }}x {{ item.name }}
-          <ion-label slot="end" class="ion-text-right">{{ (item.price * item.count) | currency:'':'symbol'}}</ion-label>
+          {{ cart.cartCount }}x {{ cart.cartTitle }}
+          <ion-label slot="end" class="ion-text-right">{{ (cart.cartPrice * cart.cartCount) | currency:'':'symbol'}}</ion-label>
         </ion-item>
       </div>
     </ion-item-sliding>  
@@ -28,3 +28,7 @@
   </ion-list>
   
 </ion-content>
+
+<ion-footer >
+  <ion-button class="product-create-button" (click)="onConfirmBill()">SAVE</ion-button>
+</ion-footer>

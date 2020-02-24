@@ -15,7 +15,8 @@ export class SettingPage implements OnInit {
 
   openProfile() {
     // this.router.navigate(['/tabs/home/setting/profile/:email']);
-    this.router.navigate(['/tabs/home/setting/profile']);
+    // this.router.navigate(['/tabs/home/setting/profile']);
+    this.router.navigateByUrl('/app/tabs/home/setting/profile');
   }
 
 }

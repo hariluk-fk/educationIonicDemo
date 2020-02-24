@@ -15,7 +15,7 @@ export class APIService {
     }
 
     public getAll<T>(url: string): Observable<T> {
-        return this.http.get<T>(this.actionUrl + '/' + url);
+        return this.http.get<T>(this.actionUrl + url);
     }
 
     public getSingle<T>(url: string, params: string[]): Observable<T> {
@@ -28,9 +28,9 @@ export class APIService {
         return this.http.get<T>(actualUrl);
     }
 
-    public add<T>(url: string, itemName: any): Observable<T> {
-        const toAdd = { ItemName: itemName };
-        return this.http.post<T>(this.actionUrl, toAdd);
+    public add<T>(url: string, itemAdd: any): Observable<T> {
+        const body = JSON.stringify(itemAdd);
+        return this.http.post<T>(this.actionUrl + url, body);
     }
 
     public update<T>(url: string, itemUpdate: any): Observable<T> {

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
-import { Profile } from './profile';
+import { userProfile } from '../../../../model/userProfile';
 import { Observable, from } from 'rxjs';
 import { ProfileService } from './profile.service';
+import { Configuration } from 'src/app/app.constants';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-profile',
@@ -12,30 +14,67 @@ import { ProfileService } from './profile.service';
 
 export class ProfilePage implements OnInit {
 
-  profile: Observable<Profile>;
-  profileTmp: Promise<Profile>;
-  user: Profile;
+  profile: Observable<userProfile>;
+  profileTmp: Promise<userProfile>;
+  user: userProfile;
   url = '';
   param = [];
   status: any;
   loading: any;
 
+  picUrl: any;
+  tokenId: string;
+
+  userNameTxt: string;
+  emailTxt: string;
+  genderTxt: string;
+  phoneNoTxt: string;
+  idCardTxt: string;
+  saveBtnTxt: string;
+
   constructor(
     public nav: NavController,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService,
+    private configuration: Configuration,
+    private storage: Storage) { }
 
   async ngOnInit() {
-    this.loading = this.createLoadingController('Loading');
+    this.userNameTxt = this.configuration.userNameTxt;
+    this.emailTxt = this.configuration.emailTxt;
+    this.genderTxt = this.configuration.genderTxt;
+    this.phoneNoTxt = this.configuration.phoneNoTxt;
+    this.idCardTxt = this.configuration.idCardTxt;
+    this.idCardTxt = this.configuration.idCardTxt;
+    this.saveBtnTxt = this.configuration.saveBtnTxt;
+
+    this.loading = this.createLoadingController('Loading profile');
     (await this.loading).present();
-    this.getProfile();
-    (await this.loading).dismiss();
+    this.storage.get('picUrl').then(url => {
+      // this.alertCompleteUpdate(url);
+      this.picUrl = url;
+    });
+    this.storage.get('tokenId').then(tokenId => {
+      // this.alertCompleteUpdate(url);
+      this.user.tokenId = tokenId;
+    });
+    this.storage.get('tokenId').then((val) => {
+      this.user.tokenId = val;
+    });
+
+    this.storage.get('email').then(result => {
+      // this.email = result;
+      this.getProfile(result);
+    });
   }
 
-  getProfile() {
-    this.profile = this.profileService.getProfile('onepiece@gmail.com');
-    this.profile.subscribe((data: Profile) => this.user = data[0]);
+  getProfile(emailTmp: string) {
+    this.profile = this.profileService.getProfile(emailTmp);
+    this.profile.subscribe(async (data: userProfile) => {
+      this.user = data[0];
+      (await this.loading).dismiss();
+    });
   }
 
   async updateProfile() {

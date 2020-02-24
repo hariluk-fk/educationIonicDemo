@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Profile } from './profile';
+import { userProfile } from '../../../../model/userProfile';
 import { APIService } from '../../../../service/APIService';
 
 @Injectable({
@@ -10,13 +10,13 @@ import { APIService } from '../../../../service/APIService';
 
 export class ProfileService {
 
-  profile: Observable<Profile>;
+  profile: Observable<userProfile>;
   status: any;
 
   constructor(private http: HttpClient, private apiService: APIService) {
   }
 
-  getProfile(email: string): Observable<Profile> {
+  getProfile(email: string): Observable<userProfile> {
     const param = [];
     const url = 'user/searchByEmail';
     param[0] = email;
